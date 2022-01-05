@@ -53,8 +53,6 @@ metadata:
   name: kafka-kafdrop-service
   labels:
     app: kafka-kafdrop
-  annotations:
-    cloud.google.com/load-balancer-type: "Internal"
 spec:
   ports:
     - protocol: "TCP"
@@ -63,5 +61,4 @@ spec:
   selector:
     app: kafka-kafdrop
   type: NodePort
-  #type: LoadBalancer
 
