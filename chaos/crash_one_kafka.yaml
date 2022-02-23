@@ -1,0 +1,15 @@
+kind: PodChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: default
+  name: pod-failure-continous-kafka-random-one
+spec:
+  selector:
+    namespaces:
+      - default
+    labelSelectors:
+      app.kubernetes.io/name: kafka
+  mode: one
+  action: pod-kill
+  duration: 1m
+  gracePeriod: 0

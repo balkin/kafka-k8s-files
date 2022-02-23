@@ -1,0 +1,20 @@
+kind: Schedule
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: default
+  name: kill-random-one
+spec:
+  schedule: '*/1 * * * *'
+  startingDeadlineSeconds: 1
+  concurrencyPolicy: Allow
+  historyLimit: 1
+  type: PodChaos
+  podChaos:
+    selector:
+      namespaces:
+        - default
+      labelSelectors:
+        app.kubernetes.io/name: kafka
+    mode: one
+    action: pod-kill
+    gracePeriod: 60

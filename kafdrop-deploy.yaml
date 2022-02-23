@@ -26,10 +26,10 @@ spec:
           name: kafka-kafdrop
           resources:
             limits:
-              cpu: 200m
+              cpu: 500m
               memory: 1Gi
             requests:
-              cpu: 200m
+              cpu: 500m
               memory: 1Gi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
@@ -44,7 +44,7 @@ spec:
             - name: SERVER_SERVLET_CONTEXTPATH
               value: "/"
             - name: KAFKA_BROKERCONNECT
-              value: "my-cluster-kafka-2.my-cluster-kafka-brokers:9092;my-cluster-kafka-1.my-cluster-kafka-brokers:9092;my-cluster-kafka-0.my-cluster-kafka-brokers:9092"
+              value: my-cluster-kafka-brokers:9092
       restartPolicy: Always
 ---
 apiVersion: v1

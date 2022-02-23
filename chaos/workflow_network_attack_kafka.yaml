@@ -1,0 +1,26 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: partition-kafka-workflow-main
+  namespace: default
+spec:
+  entry: entry
+  templates:
+    - name: entry
+      templateType: Serial
+      deadline: 1h
+      children:
+        - partition-kafka-workflow
+    - name: partition-kafka-workflow
+      templateType: NetworkChaos
+      deadline: 1h
+      networkChaos:
+        selector:
+          namespaces:
+            - default
+          labelSelectors:
+            app.kubernetes.io/name: kafka
+        mode: all
+        action: partition
+        direction: both
+

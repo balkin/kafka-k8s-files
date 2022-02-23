@@ -1,0 +1,24 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: baron-kill-all-pods
+  namespace: default
+spec:
+  entry: entry
+  templates:
+    - name: entry
+      templateType: Serial
+      deadline: 10m
+      children:
+        - pod-failure-example
+    - name: pod-failure-example
+      templateType: PodChaos
+      deadline: 10m
+      podChaos:
+        selector:
+          namespaces:
+            - default
+          labelSelectors:
+            strimzi.io/name: my-cluster-kafka
+        mode: all
+        action: pod-failure

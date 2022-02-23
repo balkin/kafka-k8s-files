@@ -1,0 +1,14 @@
+kind: PodChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: default
+  name: pod-failure-continous-kafka-50percent
+spec:
+  selector:
+    namespaces:
+      - default
+    labelSelectors:
+      app.kubernetes.io/name: kafka
+  mode: all
+  action: pod-kill
+  gracePeriod: 0
